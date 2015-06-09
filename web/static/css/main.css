@@ -1,0 +1,89 @@
+body{
+	background: #fff;
+	padding: 0;
+	margin: 0;
+}
+.top{
+	height: 60px;
+	width: 100%;
+	background: #fff;
+	border-bottom: 1px solid #ccc;
+	box-shadow: 0 2px 2px #eee;
+}
+.top p{
+	height: 100%;
+	width: 960px;
+	margin: 0 auto;
+	line-height: 60px;
+	font-size: 36px;
+	text-shadow:0 2px 5px #aaa;
+}
+.center{
+	width: 100%;
+	overflow: auto;
+	margin-top: 2rem;
+}
+.content{
+	width: 960px;
+	height: 500px;
+	margin: 0 auto;
+}
+.left,.right{
+	width: 418px;
+	height: 100%;
+	
+	float: left;
+}
+.mid{
+	width: 100px;
+	height: 100%;
+	margin: 0 10px;
+	float: left;
+}
+.mid button{
+	height: 40px;
+	width: 80px;
+	margin: 10px;
+}
+.mid .b1{
+	margin-top:180px;
+}
+textarea {
+  height: 100% !important;
+  width: 100% !important;
+  padding: 10px !important;
+  resize: none;
+}
+.threshold{
+	margin-top:20px;
+	width:100%;
+	height: 100px;
+}
+.threshold p{
+	width: 100%;
+	text-align: center;
+	font-size: 14px;
+}
+.btn-minus,.btn-plus{
+	height: 30px !important;
+	width: 30px !important;
+	float:left;
+	margin: 0 !important;
+}
+.threshold .threshold-value{
+	display: block;
+	height: 30px !important;
+	width: 40px !important;
+	float:left;
+	margin: 0;
+	padding:5px;
+	text-align: center;
+}
+.api{
+	width: 960px;
+	
+	margin: 0 auto;
+}
+.api h3{
+
+}

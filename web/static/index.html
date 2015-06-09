@@ -1,0 +1,123 @@
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<title>Word</title>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/main.css">
+
+</head>
+<body>
+<div class='top'>
+<p>Title</p>
+</div>
+<div class='center'>
+	<div class='content'>
+		<div class='left'>
+			<textarea class='form-control'>请至少输入2个中文字符</textarea>
+		</div>
+		<div class='mid'>
+			<button class="btn btn-success b1" type="button">解析</button>
+			<button class="btn btn-default b2" type="button">清空</button>
+			<div class='threshold'>
+			<p>阈值</p>
+			<button type="button" class="btn-minus btn btn-default btn-sm">
+			  <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+			</button>
+			<span class='threshold-value'>0.1</span>
+			<button type="button" class="btn-plus btn btn-default btn-sm">
+			  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+			</button>
+			</div>
+		</div>
+		<div class='right'>
+			<textarea class='form-control'></textarea>
+		</div>
+	</div>
+
+	<div class='api'>
+		<h3>API使用说明</h3>
+		<p>
+		<strong>URL：</strong>http://10.141.201.6<br>
+		<strong>Method:</strong>POST<br>
+		<strong>参数：</strong>JSON<br>
+		&emsp;&emsp;{'sentence':'需要处理的句子'}<br>
+		<strong>返回：</strong>JSON<br>
+		&emsp;&emsp;[<br>
+		&emsp;&emsp;&emsp;['需要',0.99],<br>
+		&emsp;&emsp;&emsp;['处理',0.98]<br>
+		&emsp;&emsp;]<br>
+		</p>
+	</div>
+
+
+</div>
+<div class='bottom'>
+</div>
+
+<script type="text/javascript">
+
+var itv=0.1;
+
+$('.b2').click(function(){
+	$('textarea').val('');
+});
+
+$('.b1').click(function(){
+	var strs=$('.left textarea').val();
+	strs=$.trim(strs);
+	
+	if(strs.length<2){
+		alert('请至少输入2个中文字符');
+		return;
+	}
+	var data=new Object();
+	data.sentence=strs;
+	// console.log('daw');
+	console.log(JSON.stringify(data));
+	
+	$.ajax({
+		type:"POST",
+		url:"/",
+		data:JSON.stringify(data),
+		success:function(result){
+			var res='';
+			for(var i=0;i<result.length;i++){
+				var tmp=result[i];
+				if(tmp[1]>=itv)
+					res+=tmp[0]+'\t'+tmp[1]+'\n';
+				console.log(tmp[0]+'\t'+tmp[1]);
+			}
+			$('.right textarea').val(res);
+		},
+		error:function(){
+			alert('error');
+		},
+		contentType:"application/json",
+		dataType:"json"
+	});
+});
+
+$('.btn-minus').click(function(){
+
+	var ntv=(itv*10-1)/10;
+
+	if(ntv>=0){
+		itv=ntv;
+		$('.threshold-value').text(ntv);
+	}
+});
+$('.btn-plus').click(function(){
+
+	var ntv=(itv*10+1)/10;
+	console.log(ntv);
+	if(ntv<=1){
+		itv=ntv;
+		$('.threshold-value').text(ntv);
+	}
+});
+</script>
+</body>
+</html>
